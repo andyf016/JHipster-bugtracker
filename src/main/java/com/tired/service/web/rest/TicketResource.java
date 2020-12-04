@@ -27,6 +27,11 @@ import java.util.Optional;
 
 import org.springframework.data.domain.PageImpl;
 
+import org.springframework.security.access.annotation.Secured;
+import com.tired.service.security.AuthoritiesConstants;
+import io.swagger.annotations.ApiParam;
+import org.springframework.data.domain.PageImpl;
+
 /**
  * REST controller for managing {@link com.tired.service.domain.Ticket}.
  */
@@ -145,6 +150,7 @@ public class TicketResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/tickets/{id}")
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteTicket(@PathVariable Long id) {
         log.debug("REST request to delete Ticket : {}", id);
         ticketRepository.deleteById(id);
